@@ -20,8 +20,12 @@
                     value="@{suffix}" />
             </propertyfile>
 
+            <property
+                file="res/raw/version.properties"
+                prefix="set-suffix." />
+
             <echo>
-set version suffix to @{suffix}
+set version suffix to ${set-suffix.app.version.suffix}
             </echo>
         </sequential>
     </macrodef>
@@ -53,16 +57,20 @@ set version suffix to @{suffix}
                 value="1" />
         </propertyfile>
 
-        <property file="res/raw/version.properties" />
+        <property
+            file="res/raw/version.properties"
+            prefix="increase-version." />
 
         <echo>
-increased version code to ${app.version.code} and version name to ${app.version.major}.${app.version.minor}.${app.version.buildnumber}${app.version.suffix}
+increased version code to ${increase-version.app.version.code} and version name to ${increase-version.app.version.major}.${increase-version.app.version.minor}.${increase-version.app.version.buildnumber}${increase-version.app.version.suffix}
         </echo>
     </target>
 
     <target name="update-android-manifest" >
 
-        <property file="res/raw/version.properties" />
+        <property
+            file="res/raw/version.properties"
+            prefix="update-android-manifest." />
 
         <property
             name="match.end"
@@ -75,7 +83,7 @@ increased version code to ${app.version.code} and version name to ${app.version.
         <replaceregexp
             file="AndroidManifest.xml"
             match="${matchVersionCode.start}[^&quot;]*${match.end}"
-            replace="${matchVersionCode.start}${app.version.code}${match.end}" />
+            replace="${matchVersionCode.start}${update-android-manifest.app.version.code}${match.end}" />
 
         <property
             name="matchVersionName.start"
@@ -84,10 +92,10 @@ increased version code to ${app.version.code} and version name to ${app.version.
         <replaceregexp
             file="AndroidManifest.xml"
             match="${matchVersionName.start}[^&quot;]*${match.end}"
-            replace="${matchVersionName.start}${app.version.major}.${app.version.minor}.${app.version.buildnumber}${app.version.suffix}${match.end}" />
+            replace="${matchVersionName.start}${update-android-manifest.app.version.major}.${update-android-manifest.app.version.minor}.${update-android-manifest.app.version.buildnumber}${update-android-manifest.app.version.suffix}${match.end}" />
 
         <echo>
-updated android manifest to version code ${app.version.code} and version name ${app.version.major}.${app.version.minor}.${app.version.buildnumber}${app.version.suffix}
+updated android manifest to version code ${update-android-manifest.app.version.code} and version name ${update-android-manifest.app.version.major}.${update-android-manifest.app.version.minor}.${update-android-manifest.app.version.buildnumber}${update-android-manifest.app.version.suffix}
         </echo>
     </target>
 
