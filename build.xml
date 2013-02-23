@@ -20,10 +20,8 @@
                     value="@{suffix}" />
             </propertyfile>
 
-            <property file="res/raw/version.properties" />
-
             <echo>
-Version suffix: ${app.version.suffix}
+set version suffix to @{suffix}
             </echo>
         </sequential>
     </macrodef>
@@ -58,11 +56,7 @@ Version suffix: ${app.version.suffix}
         <property file="res/raw/version.properties" />
 
         <echo>
-Version code: ${app.version.code}
-        </echo>
-
-        <echo>
-Version name: ${app.version.major}.${app.version.minor}.${app.version.buildnumber}${app.version.suffix}
+increased version code to ${app.version.code} and version name to ${app.version.major}.${app.version.minor}.${app.version.buildnumber}${app.version.suffix}
         </echo>
     </target>
 
@@ -91,6 +85,10 @@ Version name: ${app.version.major}.${app.version.minor}.${app.version.buildnumbe
             file="AndroidManifest.xml"
             match="${matchVersionName.start}[^&quot;]*${match.end}"
             replace="${matchVersionName.start}${app.version.major}.${app.version.minor}.${app.version.buildnumber}${app.version.suffix}${match.end}" />
+
+        <echo>
+updated android manifest to version code ${app.version.code} and version name ${app.version.major}.${app.version.minor}.${app.version.buildnumber}${app.version.suffix}
+        </echo>
     </target>
 
     <!-- taken from SDK's build.xml solely to modify the name of the resultink APK file: -->
