@@ -37,6 +37,12 @@ public class ConnectivityChecker extends BroadcastReceiver {
 				
 				ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
 				NetworkInfo netInfo = cm.getActiveNetworkInfo();
+				String networkType = "unknown";
+				if (netInfo.getType() == ConnectivityManager.TYPE_WIFI) {
+					networkType = "wifi";
+				} else if (netInfo.getType() == ConnectivityManager.TYPE_MOBILE) {
+					networkType = "mobile data";
+				}
 				boolean connectionOK = (netInfo != null && netInfo.isConnected());
 				if (connectionOK) {
 					// try to connect to a host (to test if the connection really works)
@@ -59,10 +65,10 @@ public class ConnectivityChecker extends BroadcastReceiver {
 				}
 				// take measures if connection failed
 				if (!connectionOK) {
-					Logger.debug("connection not working");
+					Logger.debug("connection not working, type={0}", networkType);
 					tryToReconnect(context, cm);
 				} else {
-					Logger.debug("connection OK");
+					Logger.debug("connection OK, type={0}", networkType);
 				}
 				return null;
 			}
