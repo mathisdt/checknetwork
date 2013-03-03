@@ -38,9 +38,9 @@ public class ConnectivityChecker extends BroadcastReceiver {
 				ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
 				NetworkInfo netInfo = cm.getActiveNetworkInfo();
 				String networkType = "unknown";
-				if (netInfo.getType() == ConnectivityManager.TYPE_WIFI) {
+				if (netInfo != null && netInfo.getType() == ConnectivityManager.TYPE_WIFI) {
 					networkType = "wifi";
-				} else if (netInfo.getType() == ConnectivityManager.TYPE_MOBILE) {
+				} else if (netInfo != null && netInfo.getType() == ConnectivityManager.TYPE_MOBILE) {
 					networkType = "mobile data";
 				}
 				boolean connectionOK = (netInfo != null && netInfo.isConnected());
@@ -78,7 +78,7 @@ public class ConnectivityChecker extends BroadcastReceiver {
 	
 	private void tryToReconnect(Context context, ConnectivityManager cm) {
 		NetworkInfo netInfo = cm.getActiveNetworkInfo();
-		if (netInfo.getType() == ConnectivityManager.TYPE_WIFI) {
+		if (netInfo != null && netInfo.getType() == ConnectivityManager.TYPE_WIFI) {
 			Logger.info("toggling wifi connection");
 			setWifiEnabled(context, false);
 			try {
