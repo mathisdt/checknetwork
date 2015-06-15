@@ -257,6 +257,7 @@ updated android manifest to version code ${update-android-manifest.app.version.c
         
     <property name="aapt" value="${sdk.dir}/build-tools/current/aapt" />
     <property name="dx" value="${sdk.dir}/build-tools/current/dx" />
+    <property name="zipalign" value="${sdk.dir}/build-tools/current/zipalign" />
 
     <!--
         Import per project custom build rules if present at the root of the project.
