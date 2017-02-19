@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="org.zephyrsoft.checknetwork"
-    android:versionCode="4"
+    android:versionCode="5"
     android:versionName="0.1.3-SNAPSHOT" >
 
     <uses-sdk
         android:minSdkVersion="7"
-        android:targetSdkVersion="7" />
+        android:targetSdkVersion="7"
+        android:maxSdkVersion="13" />
 
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
